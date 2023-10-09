@@ -31,6 +31,7 @@ spec:
   ports:
   - name: grafana
     port: 80
+    protocol: TCP
     targetPort: 3000
   selector:
     app.kubernetes.io/component: grafana
