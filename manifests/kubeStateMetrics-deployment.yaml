@@ -29,7 +29,7 @@ spec:
       containers:
       - env:
         - name: TZ
-          value: America/Sao_Paulo
+          value: America/Sao_Paulo  # Configura o fuso horário desejado aqui
       - args:
         - --host=127.0.0.1
         - --port=8081

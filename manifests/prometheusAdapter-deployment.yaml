@@ -33,7 +33,7 @@ spec:
       containers:
       - env:
         - name: TZ
-          value: America/Sao_Paulo
+          value: America/Sao_Paulo  # Configura o fuso horário desejado aqui
       - args:
         - --cert-dir=/var/run/serving-cert
         - --config=/etc/adapter/config.yaml

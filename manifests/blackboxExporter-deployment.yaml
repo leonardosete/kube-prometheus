@@ -27,9 +27,6 @@ spec:
     spec:
       automountServiceAccountToken: true
       containers:
-      - env:
-        - name: TZ
-          value: America/Sao_Paulo
       - args:
         - --config.file=/etc/blackbox_exporter/config.yml
         - --web.listen-address=:19115
@@ -57,6 +54,9 @@ spec:
         - mountPath: /etc/blackbox_exporter/
           name: config
           readOnly: true
+        env:
+        - name: TZ  # Adicione esta linha para configurar o fuso horário
+          value: America/Sao_Paulo  # Configure o fuso horário desejado aqui
       - args:
         - --webhook-url=http://localhost:19115/-/reload
         - --volume-dir=/etc/blackbox_exporter/
@@ -108,6 +108,8 @@ spec:
           runAsGroup: 65532
           runAsNonRoot: true
           runAsUser: 65532
+          seccompProfile:
+            type: RuntimeDefault
       nodeSelector:
         kubernetes.io/os: linux
       serviceAccountName: blackbox-exporter
