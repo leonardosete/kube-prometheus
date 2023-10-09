@@ -27,9 +27,6 @@ spec:
     spec:
       automountServiceAccountToken: true
       containers:
-      - env:
-        - name: TZ
-          value: America/Sao_Paulo  # Configura o fuso horário desejado aqui
       - args:
         - --kubelet-service=kube-system/kubelet
         - --prometheus-config-reloader=quay.io/prometheus-operator/prometheus-config-reloader:v0.68.0
@@ -76,6 +73,8 @@ spec:
           runAsGroup: 65532
           runAsNonRoot: true
           runAsUser: 65532
+          seccompProfile:
+            type: RuntimeDefault
       nodeSelector:
         kubernetes.io/os: linux
       securityContext:
