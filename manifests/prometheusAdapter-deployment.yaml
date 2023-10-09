@@ -31,6 +31,9 @@ spec:
     spec:
       automountServiceAccountToken: true
       containers:
+      - env:
+        - name: TZ
+          value: America/Sao_Paulo
       - args:
         - --cert-dir=/var/run/serving-cert
         - --config=/etc/adapter/config.yaml

@@ -27,6 +27,9 @@ spec:
     spec:
       automountServiceAccountToken: true
       containers:
+      - env:
+        - name: TZ
+          value: America/Sao_Paulo
       - args:
         - --kubelet-service=kube-system/kubelet
         - --prometheus-config-reloader=quay.io/prometheus-operator/prometheus-config-reloader:v0.68.0

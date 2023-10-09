@@ -27,6 +27,9 @@ spec:
     spec:
       automountServiceAccountToken: true
       containers:
+      - env:
+        - name: TZ
+          value: America/Sao_Paulo
       - args:
         - --host=127.0.0.1
         - --port=8081
