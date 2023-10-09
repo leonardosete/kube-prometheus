@@ -31,9 +31,6 @@ spec:
     spec:
       automountServiceAccountToken: true
       containers:
-      - env:
-        - name: TZ
-          value: America/Sao_Paulo  # Configura o fuso horário desejado aqui
       - args:
         - --cert-dir=/var/run/serving-cert
         - --config=/etc/adapter/config.yaml
@@ -73,6 +70,9 @@ spec:
             drop:
             - ALL
           readOnlyRootFilesystem: true
+          runAsNonRoot: true
+          seccompProfile:
+            type: RuntimeDefault
         startupProbe:
           failureThreshold: 18
           httpGet:
