@@ -11,9 +11,9 @@ metadata:
   namespace: monitoring
 spec:
   ports:
-  - name: web
-    port: 9090
-    targetPort: web
+  - name: prometheus-k8s
+    port: 80
+    targetPort: 9090
   - name: reloader-web
     port: 8080
     targetPort: reloader-web
