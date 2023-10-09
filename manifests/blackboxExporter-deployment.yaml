@@ -54,9 +54,6 @@ spec:
         - mountPath: /etc/blackbox_exporter/
           name: config
           readOnly: true
-        env:
-        - name: TZ  # Adicione esta linha para configurar o fuso horário
-          value: America/Sao_Paulo  # Configure o fuso horário desejado aqui
       - args:
         - --webhook-url=http://localhost:19115/-/reload
         - --volume-dir=/etc/blackbox_exporter/

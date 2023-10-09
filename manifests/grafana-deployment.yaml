@@ -27,9 +27,7 @@ spec:
     spec:
       automountServiceAccountToken: false
       containers:
-      - env:
-        - name: TZ
-          value: America/Sao_Paulo  # Configura o fuso horário desejado aqui
+      - env: []
         image: grafana/grafana:9.5.3
         name: grafana
         ports:
