@@ -12,8 +12,8 @@ metadata:
 spec:
   ports:
   - name: web
-    port: 9090
-    targetPort: web
+    port: 80
+    targetPort: 9090
   - name: reloader-web
     port: 8080
     targetPort: reloader-web
@@ -23,3 +23,42 @@ spec:
     app.kubernetes.io/name: prometheus
     app.kubernetes.io/part-of: kube-prometheus
   sessionAffinity: ClientIP
+  type: ClusterIP
+---
+apiVersion: networking.gke.io/v1
+kind: ManagedCertificate
+metadata:
+  name: prometheus-certs
+  namespace: monitoring
+spec:
+  domains:
+    - prometheus.desafioleosete.com
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    ingressclass.kubernetes.io/is-default-class: "true"
+    kubernetes.io/ingress.class: gce
+    kubernetes.io/ingress.global-static-ip-name: gke-lb-ext-leosete-prometheus
+    networking.gke.io/managed-certificates: prometheus-certs
+  labels:
+    app.kubernetes.io/component: prometheus
+    app.kubernetes.io/instance: k8s
+    app.kubernetes.io/name: prometheus
+    app.kubernetes.io/part-of: kube-prometheus
+    app.kubernetes.io/version: 2.47.0
+  name: prometheus-ext
+  namespace: monitoring
+spec:
+  rules:
+  - host: prometheus.desafioleosete.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: prometheus-k8s
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
