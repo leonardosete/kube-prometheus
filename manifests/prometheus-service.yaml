@@ -29,7 +29,7 @@ spec:
 apiVersion: networking.gke.io/v1
 kind: ManagedCertificate
 metadata:
-  name: prometheus-certs
+  name: prometheus-cert
   namespace: monitoring
 spec:
   domains:
@@ -42,7 +42,7 @@ metadata:
     ingressclass.kubernetes.io/is-default-class: "true"
     kubernetes.io/ingress.class: gce
     kubernetes.io/ingress.global-static-ip-name: gke-lb-ext-leosete-prometheus
-    networking.gke.io/managed-certificates: prometheus-certs
+    networking.gke.io/managed-certificates: prometheus-cert
   labels:
     app.kubernetes.io/component: prometheus
     app.kubernetes.io/instance: k8s
